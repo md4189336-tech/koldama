@@ -1,9 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, memo } from 'react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 import libraryImage from '@/assets/library-books.jpg';
 
-const Bibliotheque = () => {
+const Bibliotheque = memo(() => {
   const { data: livres, loading: loadingLivres, error: errorLivres } = useFetchData('livres');
   const { data: auteurs, loading: loadingAuteurs, error: errorAuteurs } = useFetchData('auteurs');
   const [selectedCategory, setSelectedCategory] = useState('Tous');
@@ -61,6 +61,7 @@ const Bibliotheque = () => {
                   src={libraryImage} 
                   alt={`Couverture de ${livre.title}`} 
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
               <p className="font-bold text-card-foreground text-sm sm:text-base lg:text-lg line-clamp-2 mb-1">
@@ -118,6 +119,8 @@ const Bibliotheque = () => {
       </section>
     </div>
   );
-};
+});
+
+Bibliotheque.displayName = 'Bibliotheque';
 
 export default Bibliotheque;

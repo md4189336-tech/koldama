@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { Map, ChevronRight } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 import siteImage from '@/assets/site-historique.jpg';
 
-const Sites = () => {
+const Sites = memo(() => {
   const { data: sites, loading, error } = useFetchData('sites');
 
   return (
@@ -33,7 +34,12 @@ const Sites = () => {
             key={site.id} 
             className="bg-card rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-2xl"
           >
-            <img src={siteImage} alt={site.name} className="h-48 sm:h-56 lg:h-64 w-full object-cover" />
+            <img 
+              src={siteImage} 
+              alt={site.name} 
+              className="h-48 sm:h-56 lg:h-64 w-full object-cover"
+              loading="lazy"
+            />
             <div className="p-4 sm:p-5 lg:p-6">
               <div className="text-xs font-bold uppercase tracking-wider text-accent mb-1">
                 {site.role}
@@ -57,6 +63,8 @@ const Sites = () => {
       </p>
     </div>
   );
-};
+});
+
+Sites.displayName = 'Sites';
 
 export default Sites;

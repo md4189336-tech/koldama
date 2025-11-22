@@ -1,20 +1,20 @@
-import { useState } from 'react';
+import { useState, memo, useCallback } from 'react';
 import { Smartphone, BookOpen, Map } from 'lucide-react';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 
-const Contact = () => {
+const Contact = memo(() => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     console.log('Formulaire de contact soumis:', formData);
     alert('Merci ! Votre message a été envoyé avec succès.');
     setFormData({ name: '', email: '', message: '' });
-  };
+  }, []);
 
   return (
     <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
@@ -104,6 +104,8 @@ const Contact = () => {
       </div>
     </div>
   );
-};
+});
+
+Contact.displayName = 'Contact';
 
 export default Contact;
