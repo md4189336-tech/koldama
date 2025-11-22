@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 
-const Partenaires = () => {
+const Partenaires = memo(() => {
   const { data: partners, loading, error } = useFetchData('partners');
   const categories = ['ONG', 'PME', 'PMI'];
 
@@ -27,7 +28,12 @@ const Partenaires = () => {
               className="min-w-[160px] sm:min-w-[180px] lg:min-w-[200px] bg-card p-3 sm:p-4 rounded-lg shadow-md border-b-4 border-accent flex-shrink-0"
             >
               <div className="h-8 sm:h-10 flex items-center justify-center mb-2 sm:mb-3">
-                <div className="text-[10px] sm:text-xs font-bold text-muted-foreground truncate px-2">{p.name}</div>
+                <img 
+                  src={p.logo} 
+                  alt={p.name} 
+                  className="h-full object-contain"
+                  loading="lazy"
+                />
               </div>
               <p className="text-center font-bold text-card-foreground text-xs sm:text-sm truncate">{p.name}</p>
               <p className="text-center text-[10px] sm:text-xs text-muted-foreground mt-1 line-clamp-2">
@@ -47,9 +53,12 @@ const Partenaires = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {partners?.filter(p => p.category === cat).map(p => (
               <div key={p.id} className="flex items-center bg-card p-3 sm:p-4 rounded-lg shadow">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-muted rounded flex items-center justify-center mr-3 sm:mr-4 text-[10px] sm:text-xs font-bold text-muted-foreground flex-shrink-0">
-                  Logo
-                </div>
+                <img 
+                  src={p.logo} 
+                  alt={p.name} 
+                  className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded mr-3 sm:mr-4 flex-shrink-0"
+                  loading="lazy"
+                />
                 <div className="min-w-0 flex-1">
                   <h4 className="text-base sm:text-lg font-bold text-card-foreground truncate">{p.name}</h4>
                   <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{p.description}</p>
@@ -69,6 +78,8 @@ const Partenaires = () => {
       </div>
     </div>
   );
-};
+});
+
+Partenaires.displayName = 'Partenaires';
 
 export default Partenaires;

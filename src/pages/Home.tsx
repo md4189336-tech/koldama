@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Map, Globe, ChevronRight, Users } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
@@ -25,7 +26,7 @@ const CtaSection = ({ title, icon: Icon, description, targetPage }: {
   </div>
 );
 
-const Home = () => {
+const Home = memo(() => {
   const { data: sitesData } = useFetchData('sites');
   const { data: partnersData } = useFetchData('partners');
 
@@ -33,8 +34,12 @@ const Home = () => {
     <div className="space-y-8 sm:space-y-12">
       {/* Hero Section */}
       <header className="relative h-48 sm:h-64 md:h-80 lg:h-96 flex items-center justify-center text-center shadow-2xl overflow-hidden rounded-b-3xl">
-        <img src={heroImage} alt="Kolda Heritage" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/40"></div>
+        <img 
+          src={heroImage} 
+          alt="Kolda Heritage" 
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
         <div className="relative p-4 sm:p-6 max-w-4xl z-10 px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 sm:mb-4 leading-tight">
             Découvrez l'âme culturelle de Kolda
@@ -75,7 +80,8 @@ const Home = () => {
             <img 
               className="h-48 sm:h-56 md:h-full w-full object-cover" 
               src={siteImage} 
-              alt="Arbre de Moussamolo" 
+              alt="Arbre de Moussamolo"
+              loading="lazy"
             />
           </div>
           <div className="p-4 sm:p-6 lg:p-8">
@@ -109,9 +115,12 @@ const Home = () => {
                 className="p-4 sm:p-6 bg-card rounded-lg shadow-xl text-center w-32 sm:w-40 lg:w-48 transform hover:scale-105 transition-transform"
               >
                 <div className="h-12 sm:h-16 flex items-center justify-center mb-2 sm:mb-3">
-                  <div className="w-20 sm:w-24 h-8 sm:h-12 bg-muted rounded flex items-center justify-center text-[10px] sm:text-xs font-bold text-muted-foreground px-1">
-                    {p.name}
-                  </div>
+                  <img 
+                    src={p.logo} 
+                    alt={p.name}
+                    className="h-full max-w-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
                 <p className="text-xs sm:text-sm font-semibold text-card-foreground truncate">{p.name}</p>
               </div>
@@ -129,6 +138,8 @@ const Home = () => {
       </section>
     </div>
   );
-};
+});
+
+Home.displayName = 'Home';
 
 export default Home;

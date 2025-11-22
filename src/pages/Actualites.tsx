@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 import cultureImage from '@/assets/culture-danse.jpg';
 
-const Actualites = () => {
+const Actualites = memo(() => {
   const { data: news, loading, error } = useFetchData('actualites');
 
   const traditions = [
@@ -41,7 +42,12 @@ const Actualites = () => {
               key={item.id} 
               className="bg-card rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-xl"
             >
-              <img src={cultureImage} alt={item.title} className="h-40 sm:h-48 w-full object-cover" />
+              <img 
+                src={cultureImage} 
+                alt={item.title} 
+                className="h-40 sm:h-48 w-full object-cover"
+                loading="lazy"
+              />
               <div className="p-3 sm:p-4">
                 <div className="flex justify-between items-center text-[10px] sm:text-xs text-muted-foreground mb-2">
                   <span className={`font-semibold ${item.type === 'Vidéo' ? 'text-destructive' : 'text-primary'}`}>
@@ -64,7 +70,12 @@ const Actualites = () => {
           {traditions.map(t => (
             <div key={t.id} className="bg-card rounded-lg shadow-md overflow-hidden">
               <div className="h-24 sm:h-32 w-full bg-muted flex items-center justify-center">
-                <img src={cultureImage} alt={t.title} className="h-full w-full object-cover" />
+                <img 
+                  src={cultureImage} 
+                  alt={t.title} 
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="p-3 sm:p-4">
                 <h4 className="font-bold text-card-foreground mb-1 text-sm sm:text-base line-clamp-2">{t.title}</h4>
@@ -76,6 +87,8 @@ const Actualites = () => {
       </section>
     </div>
   );
-};
+});
+
+Actualites.displayName = 'Actualites';
 
 export default Actualites;

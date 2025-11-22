@@ -114,7 +114,8 @@ export const mockData = {
       category: "ONG", 
       isPremium: true, 
       contact: "fondation@email.org", 
-      description: "Soutien aux initiatives éducatives et culturelles dans la région de Kolda." 
+      description: "Soutien aux initiatives éducatives et culturelles dans la région de Kolda.",
+      logo: "https://placehold.co/100x50/50c878/ffffff?text=ONG+1"
     },
     { 
       id: 402, 
@@ -122,7 +123,8 @@ export const mockData = {
       category: "PME", 
       isPremium: false, 
       contact: "agri@email.org", 
-      description: "Entreprise agricole promouvant les cultures locales et l'autonomie alimentaire." 
+      description: "Entreprise agricole promouvant les cultures locales et l'autonomie alimentaire.",
+      logo: "https://placehold.co/100x50/a52a2a/ffffff?text=PME+1"
     },
     { 
       id: 403, 
@@ -130,7 +132,8 @@ export const mockData = {
       category: "PMI", 
       isPremium: true, 
       contact: "tech@email.org", 
-      description: "Solutions numériques et services d'archivage pour la préservation culturelle." 
+      description: "Solutions numériques et services d'archivage pour la préservation culturelle.",
+      logo: "https://placehold.co/100x50/8b4513/ffffff?text=PMI+1"
     },
     { 
       id: 404, 
@@ -138,7 +141,8 @@ export const mockData = {
       category: "ONG", 
       isPremium: false, 
       contact: "griots@email.org", 
-      description: "Préservation et transmission des traditions orales du Fouladou." 
+      description: "Préservation et transmission des traditions orales du Fouladou.",
+      logo: "https://placehold.co/100x50/50c878/ffffff?text=ONG+2"
     },
   ],
   actualites: [

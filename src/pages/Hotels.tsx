@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 
-const Hotels = () => {
+const Hotels = memo(() => {
   const { data: hotels, loading, error } = useFetchData('hotels');
 
   return (
@@ -54,6 +55,8 @@ const Hotels = () => {
       </div>
     </div>
   );
-};
+});
+
+Hotels.displayName = 'Hotels';
 
 export default Hotels;
