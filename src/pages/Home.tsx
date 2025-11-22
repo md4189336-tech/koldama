@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BookOpen, Map, Globe, ChevronRight, Users } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
 import heroImage from '@/assets/hero-kolda.jpg';
-import siteImage from '@/assets/site-historique.jpg';
+import arbreMousemolo from '@/assets/arbre-moussamolo-1.jpg';
 
 const CtaSection = ({ title, icon: Icon, description, targetPage }: {
   title: string;
@@ -79,7 +79,7 @@ const Home = memo(() => {
           <div className="md:flex-shrink-0 w-full md:w-56">
             <img 
               className="h-48 sm:h-56 md:h-full w-full object-cover" 
-              src={siteImage} 
+              src={arbreMousemolo} 
               alt="Arbre de Moussamolo"
               loading="lazy"
             />

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Map, ChevronRight } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
-import siteImage from '@/assets/site-historique.jpg';
+import arbreMousemolo from '@/assets/arbre-moussamolo-2.jpeg';
 
 const Sites = memo(() => {
   const { data: sites, loading, error } = useFetchData('sites');
@@ -35,7 +35,7 @@ const Sites = memo(() => {
             className="bg-card rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-2xl"
           >
             <img 
-              src={siteImage} 
+              src={arbreMousemolo} 
               alt={site.name} 
               className="h-48 sm:h-56 lg:h-64 w-full object-cover"
               loading="lazy"
