@@ -77,7 +77,13 @@ const Bibliotheque = memo(() => {
                     : 'bg-muted text-muted-foreground cursor-not-allowed'
                 }`}
                 disabled={!livre.telecharger}
-                onClick={() => livre.telecharger && alert(`Début du téléchargement de : ${livre.title}`)}
+                onClick={() => {
+                  if (livre.telecharger && (livre as any).pdfUrl) {
+                    window.open((livre as any).pdfUrl, '_blank');
+                  } else if (livre.telecharger) {
+                    alert(`Livre disponible : ${livre.title}`);
+                  }
+                }}
               >
                 {livre.telecharger ? 'Lire' : 'En ligne'}
               </button>
