@@ -1,8 +1,9 @@
 import { memo } from 'react';
-import { Map, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 import arbreMousemolo from '@/assets/arbre-moussamolo-2.jpeg';
+import Map from '@/components/Map';
 
 const Sites = memo(() => {
   const { data: sites, loading, error } = useFetchData('sites');
@@ -14,18 +15,8 @@ const Sites = memo(() => {
       </h2>
       <StatusView loading={loading} error={error} />
 
-      {/* Map Placeholder */}
-      <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-muted rounded-xl shadow-inner relative overflow-hidden h-64 sm:h-80 lg:h-96">
-        <Map className="w-8 h-8 sm:w-10 sm:h-10 text-muted-foreground absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute inset-0 bg-heritage-earth/30 flex items-center justify-center p-4">
-          <div className="bg-card p-3 sm:p-4 rounded-lg shadow-lg max-w-md">
-            <p className="font-semibold text-card-foreground mb-2 text-sm sm:text-base">Carte Interactive</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Localisation approximative des sites historiques de Kolda : Moussamolo, Dabo, Médina Gounass...
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* Interactive Map */}
+      {sites && <Map sites={sites} />}
 
       {/* Sites Grid */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
