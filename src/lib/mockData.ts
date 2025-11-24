@@ -40,6 +40,15 @@ export const mockData = {
       summary: "Chroniques des royaumes précoloniaux.", 
       telecharger: true 
     },
+    { 
+      id: 6, 
+      title: "Un Souvenir de Solférino", 
+      auteur: "Henry Dunant", 
+      categorie: "Histoire", 
+      summary: "Récit fondateur de la Croix-Rouge sur la bataille de Solférino (1859).", 
+      telecharger: true,
+      pdfUrl: "/books/souvenir-solferino.pdf"
+    },
   ],
   auteurs: [
     { 
@@ -56,6 +65,11 @@ export const mockData = {
       id: 103, 
       name: "Aïsha Tall", 
       bio: "Chercheuse en anthropologie culturelle, elle documente les traditions culinaires et artisanales de Kolda.", 
+    },
+    { 
+      id: 104, 
+      name: "Henry Dunant", 
+      bio: "Fondateur de la Croix-Rouge et prix Nobel de la paix (1901). Son récit 'Un Souvenir de Solférino' a inspiré la création du mouvement humanitaire international.", 
     },
   ],
   sites: [
