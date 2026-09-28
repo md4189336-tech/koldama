@@ -1,123 +1,92 @@
-import { useEffect, useRef, useState } from 'react';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIconRetina from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIconRetina,
+  shadowUrl: markerShadow,
+});
+
+export interface MapPoint {
+  id: string | number;
+  name: string;
+  description: string;
+  lat: number;
+  lng: number;
+  image?: string | null;
+  role?: string;
+}
 
 interface MapProps {
-  sites: Array<{
-    id: number;
-    name: string;
-    description: string;
-    role: string;
-    lat: number;
-    lng: number;
-  }>;
+  sites: MapPoint[];
 }
 
 const Map = ({ sites }: MapProps) => {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
-  const [isTokenSet, setIsTokenSet] = useState(false);
-
-  const initializeMap = () => {
-    if (!mapContainer.current || !mapboxToken) return;
-
-    mapboxgl.accessToken = mapboxToken;
-    
-    // Center on Kolda region
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-14.95, 12.88], // Kolda coordinates
-      zoom: 11,
-    });
-
-    // Add navigation controls
-    map.current.addControl(
-      new mapboxgl.NavigationControl({
-        visualizePitch: true,
-      }),
-      'top-right'
-    );
-
-    // Add markers for each site
-    sites.forEach(site => {
-      if (map.current && site.lat && site.lng) {
-        const marker = new mapboxgl.Marker({ color: '#166534' })
-          .setLngLat([site.lng, site.lat])
-          .setPopup(
-            new mapboxgl.Popup({ offset: 25 })
-              .setHTML(`
-                <div class="p-2">
-                  <h3 class="font-bold text-sm mb-1">${site.name}</h3>
-                  <p class="text-xs text-muted-foreground">${site.description}</p>
-                  <a 
-                    href="https://www.google.com/maps/search/?api=1&query=${site.lat},${site.lng}" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="text-xs text-primary hover:underline mt-1 inline-block"
-                  >
-                    Voir l'itinéraire →
-                  </a>
-                </div>
-              `)
-          )
-          .addTo(map.current);
-      }
-    });
-
-    setIsTokenSet(true);
-  };
 
   useEffect(() => {
-    return () => {
-      map.current?.remove();
-    };
-  }, []);
+    if (!mapContainer.current) return;
 
-  if (!isTokenSet) {
-    return (
-      <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-muted rounded-xl shadow-inner">
-        <div className="max-w-md mx-auto space-y-4">
-          <div>
-            <h3 className="font-semibold text-card-foreground mb-2">Activer la Carte Interactive</h3>
-            <p className="text-xs sm:text-sm text-muted-foreground mb-4">
-              Pour afficher la carte interactive, vous devez entrer votre token Mapbox public.
-              <a 
-                href="https://mapbox.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-primary hover:underline ml-1"
-              >
-                Obtenir un token gratuit →
-              </a>
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="Coller votre token Mapbox ici..."
-              value={mapboxToken}
-              onChange={(e) => setMapboxToken(e.target.value)}
-              className="flex-1"
-            />
-            <Button 
-              onClick={initializeMap}
-              disabled={!mapboxToken}
-            >
-              Activer
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    const map = L.map(mapContainer.current, { scrollWheelZoom: false }).setView([12.8833, -14.95], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    sites.filter(site => Number.isFinite(site.lat) && Number.isFinite(site.lng)).forEach(site => {
+      const popup = document.createElement('div');
+      popup.className = 'kolda-map-popup';
+
+      if (site.image) {
+        const image = document.createElement('img');
+        image.src = site.image;
+        image.alt = site.name;
+        image.style.width = '200px';
+        image.style.maxHeight = '120px';
+        image.style.objectFit = 'cover';
+        image.style.marginBottom = '8px';
+        image.onerror = () => {
+          image.remove();
+        };
+        popup.append(image);
+      }
+
+      const title = document.createElement('strong');
+      title.textContent = site.name;
+      title.style.display = 'block';
+      popup.append(title);
+
+      const description = document.createElement('p');
+      description.textContent = site.description;
+      description.style.margin = '4px 0 8px';
+      popup.append(description);
+
+      const directions = document.createElement('a');
+      directions.href = `https://www.google.com/maps/dir/?api=1&destination=${site.lat},${site.lng}`;
+      directions.target = '_blank';
+      directions.rel = 'noopener noreferrer';
+      directions.textContent = 'Itinéraire Google Maps';
+      popup.append(directions);
+
+      L.marker([site.lat, site.lng]).bindPopup(popup).addTo(map);
+    });
+
+    if (sites.length > 1) {
+      map.fitBounds(sites.map(site => [site.lat, site.lng] as [number, number]), { padding: [24, 24], maxZoom: 12 });
+    }
+
+    return () => {
+      map.remove();
+    };
+  }, [sites]);
 
   return (
-    <div className="mb-6 sm:mb-8 rounded-xl overflow-hidden shadow-lg">
-      <div ref={mapContainer} className="h-64 sm:h-80 lg:h-96 w-full" />
+    <div className="mb-6 sm:mb-8 overflow-hidden rounded-lg shadow-lg">
+      <div ref={mapContainer} className="h-72 sm:h-96 w-full" aria-label="Carte interactive de Kolda" />
     </div>
   );
 };

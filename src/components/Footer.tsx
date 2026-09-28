@@ -1,4 +1,5 @@
 import { BookOpen, Map, Globe, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => (
   <footer className="mt-8 sm:mt-12 p-4 sm:p-6 lg:p-8 bg-primary text-primary-foreground">
@@ -14,7 +15,8 @@ export const Footer = () => (
           <h4 className="font-bold text-base sm:text-lg mb-3">Ressources</h4>
           <ul className="space-y-2 text-xs sm:text-sm text-primary-foreground/80">
             <li><a href="#" className="hover:text-accent transition-colors">Auteurs</a></li>
-            <li><a href="#" className="hover:text-accent transition-colors">Contes et Légendes</a></li>
+            <li><Link to="/actualites" className="hover:text-accent transition-colors">Contes et Légendes</Link></li>
+            <li><Link to="/galerie" className="hover:text-accent transition-colors">Galerie Photos</Link></li>
             <li><a href="#" className="hover:text-accent transition-colors">Médiathèque</a></li>
           </ul>
         </div>
@@ -22,7 +24,7 @@ export const Footer = () => (
           <h4 className="font-bold text-base sm:text-lg mb-3">Partenariat</h4>
           <ul className="space-y-2 text-xs sm:text-sm text-primary-foreground/80">
             <li><a href="#" className="hover:text-accent transition-colors">Devenir Partenaire</a></li>
-            <li><a href="#" className="hover:text-accent transition-colors">Espace Admin</a></li>
+            <li><Link to="/admin" className="hover:text-accent transition-colors">Espace Admin</Link></li>
             <li><a href="#" className="hover:text-accent transition-colors">Mentions Légales</a></li>
           </ul>
         </div>

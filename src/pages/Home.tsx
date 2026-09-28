@@ -2,8 +2,8 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Map, Globe, ChevronRight, Users } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
-import heroImage from '@/assets/hero-kolda.jpg';
-import arbreMousemolo from '@/assets/arbre-moussamolo-1.jpg';
+import { KoldaImage } from '@/components/KoldaImage';
+import { koldaMedia } from '@/lib/koldaMedia';
 
 const CtaSection = ({ title, icon: Icon, description, targetPage }: {
   title: string;
@@ -33,13 +33,14 @@ const Home = memo(() => {
   return (
     <div className="space-y-8 sm:space-y-12">
       {/* Hero Section */}
-      <header className="relative h-48 sm:h-64 md:h-80 lg:h-96 flex items-center justify-center text-center shadow-2xl overflow-hidden rounded-b-3xl">
-        <img 
-          src={heroImage} 
-          alt="Kolda Heritage" 
+      <header className="relative h-48 sm:h-64 md:h-80 lg:h-96 flex items-center justify-center text-center shadow-2xl overflow-hidden rounded-b-3xl bg-gradient-to-br from-emerald-950 via-stone-900 to-amber-950">
+        <KoldaImage
+          src={koldaMedia.hero}
+          alt="Vue aérienne du pont et de la route centrale de Kolda" 
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
         />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/60 to-black/30" />
         <div className="relative p-4 sm:p-6 max-w-4xl z-10 px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 sm:mb-4 leading-tight">
             Découvrez l'âme culturelle de Kolda
@@ -74,13 +75,13 @@ const Home = memo(() => {
 
       {/* Featured Site */}
       <section className="container mx-auto px-3 sm:px-4 lg:px-6">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-foreground">Site Historique du Jour</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-foreground">Lieux Culturels & Religieux</h2>
         <div className="flex flex-col md:flex-row bg-card rounded-xl shadow-lg overflow-hidden">
           <div className="md:flex-shrink-0 w-full md:w-56">
-            <img 
+            <KoldaImage
               className="h-48 sm:h-56 md:h-full w-full object-cover" 
-              src={arbreMousemolo} 
-              alt="Arbre de Moussamolo"
+              src={koldaMedia.mosque} 
+              alt="Grande Mosquée de Kolda"
               loading="lazy"
             />
           </div>
@@ -89,10 +90,10 @@ const Home = memo(() => {
               Lieu de Mémoire
             </div>
             <p className="block mt-1 text-lg sm:text-xl leading-tight font-medium text-card-foreground">
-              {sitesData?.[0]?.name}
+              Grande Mosquée de Kolda
             </p>
             <p className="mt-2 text-sm sm:text-base text-muted-foreground line-clamp-3 md:line-clamp-none">
-              {sitesData?.[0]?.description}
+              Découvrez la grande mosquée blanche de Kolda, son minaret et son dôme vert, au cœur de la vie spirituelle du Fouladou.
             </p>
             <Link 
               to="/sites" 
@@ -102,6 +103,16 @@ const Home = memo(() => {
             </Link>
           </div>
         </div>
+      </section>
+
+      <section className="container mx-auto px-3 sm:px-4 lg:px-6">
+        <h2 className="mb-4 text-2xl font-bold text-foreground">Territoires du Fouladou</h2>
+        <KoldaImage
+          src={koldaMedia.regionalMap}
+          alt="Carte de la région de Kolda, du Fouladou et de ses départements"
+          className="max-h-[28rem] w-full rounded-lg bg-muted object-contain"
+          loading="lazy"
+        />
       </section>
 
       {/* Premium Partners */}
@@ -115,12 +126,7 @@ const Home = memo(() => {
                 className="p-4 sm:p-6 bg-card rounded-lg shadow-xl text-center w-32 sm:w-40 lg:w-48 transform hover:scale-105 transition-transform"
               >
                 <div className="h-12 sm:h-16 flex items-center justify-center mb-2 sm:mb-3">
-                  <img 
-                    src={p.logo} 
-                    alt={p.name}
-                    className="h-full max-w-full object-contain"
-                    loading="lazy"
-                  />
+                  <Users aria-hidden="true" className="h-8 w-8 text-accent" />
                 </div>
                 <p className="text-xs sm:text-sm font-semibold text-card-foreground truncate">{p.name}</p>
               </div>

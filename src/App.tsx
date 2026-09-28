@@ -16,6 +16,8 @@ const Hotels = lazy(() => import("./pages/Hotels"));
 const Partenaires = lazy(() => import("./pages/Partenaires"));
 const Actualites = lazy(() => import("./pages/Actualites"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Admin = lazy(() => import("./pages/Admin"));
+const Galerie = lazy(() => import("./pages/Galerie"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Optimized QueryClient with caching
@@ -60,6 +62,8 @@ const App = () => (
                 <Route path="/partenaires" element={<Partenaires />} />
                 <Route path="/actualites" element={<Actualites />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/galerie" element={<Galerie />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

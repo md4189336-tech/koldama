@@ -1,3 +1,5 @@
+import { koldaMedia } from '@/lib/koldaMedia';
+
 export const mockData = {
   livres: [
     { 
@@ -91,36 +93,24 @@ export const mockData = {
     },
     { 
       id: 203, 
-      name: "Mosquée Historique de Médina Gounass", 
-      description: "Centre spirituel et lieu de pèlerinage, architecture traditionnelle remarquable datant du XIXe siècle.", 
+      name: "Grande Mosquée de Kolda", 
+      description: "Lieu de culte emblématique de Kolda, reconnaissable à son dôme vert et à son minaret.", 
       role: "Religieux", 
-      lat: 12.85, 
-      lng: -14.92 
+      lat: 12.8833, 
+      lng: -14.95,
+      image: koldaMedia.mosque
+    },
+    {
+      id: 204,
+      name: "Carrefour urbain de Kolda",
+      description: "Repère du centre urbain de Kolda et de ses échanges quotidiens.",
+      role: "Patrimoine urbain",
+      lat: 12.884,
+      lng: -14.94,
+      image: koldaMedia.crossroads
     },
   ],
-  hotels: [
-    { 
-      id: 301, 
-      name: "Hôtel Kolda Oasis", 
-      services: ["Piscine", "Climatisation", "Wifi", "Restaurant"], 
-      whatsapp: "77 123 45 67", 
-      description: "Hôtel moderne au cœur de Kolda, offrant confort et services de qualité." 
-    },
-    { 
-      id: 302, 
-      name: "Résidence du Fouladou", 
-      services: ["Restaurant", "Parking sécurisé", "Wifi"], 
-      whatsapp: "70 987 65 43", 
-      description: "Ambiance chaleureuse et authentique dans un cadre verdoyant." 
-    },
-    { 
-      id: 303, 
-      name: "Auberge Tradition", 
-      services: ["Climatisation", "Petit-déjeuner inclus"], 
-      whatsapp: "76 555 44 33", 
-      description: "Hébergement économique avec accueil familial." 
-    },
-  ],
+  hotels: [],
   partners: [
     { 
       id: 401, 
@@ -128,8 +118,7 @@ export const mockData = {
       category: "ONG", 
       isPremium: true, 
       contact: "fondation@email.org", 
-      description: "Soutien aux initiatives éducatives et culturelles dans la région de Kolda.",
-      logo: "https://placehold.co/100x50/50c878/ffffff?text=ONG+1"
+      description: "Soutien aux initiatives éducatives et culturelles dans la région de Kolda."
     },
     { 
       id: 402, 
@@ -137,8 +126,7 @@ export const mockData = {
       category: "PME", 
       isPremium: false, 
       contact: "agri@email.org", 
-      description: "Entreprise agricole promouvant les cultures locales et l'autonomie alimentaire.",
-      logo: "https://placehold.co/100x50/a52a2a/ffffff?text=PME+1"
+      description: "Entreprise agricole promouvant les cultures locales et l'autonomie alimentaire."
     },
     { 
       id: 403, 
@@ -146,8 +134,7 @@ export const mockData = {
       category: "PMI", 
       isPremium: true, 
       contact: "tech@email.org", 
-      description: "Solutions numériques et services d'archivage pour la préservation culturelle.",
-      logo: "https://placehold.co/100x50/8b4513/ffffff?text=PMI+1"
+      description: "Solutions numériques et services d'archivage pour la préservation culturelle."
     },
     { 
       id: 404, 
@@ -155,8 +142,7 @@ export const mockData = {
       category: "ONG", 
       isPremium: false, 
       contact: "griots@email.org", 
-      description: "Préservation et transmission des traditions orales du Fouladou.",
-      logo: "https://placehold.co/100x50/50c878/ffffff?text=ONG+2"
+      description: "Préservation et transmission des traditions orales du Fouladou."
     },
   ],
   actualites: [

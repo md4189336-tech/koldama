@@ -87,8 +87,8 @@ const Contact = memo(() => {
               <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3 text-primary mt-1 flex-shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-sm sm:text-base">WhatsApp Direct</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">+221 78 456 78 90</p>
-                <WhatsAppButton number="784567890" className="mt-2 w-full text-xs sm:text-sm" />
+                <p className="text-xs sm:text-sm text-muted-foreground">+221 78 208 96 04</p>
+                <WhatsAppButton number="782089604" className="mt-2 w-full text-xs sm:text-sm" />
               </div>
             </div>
             <div className="flex items-center">

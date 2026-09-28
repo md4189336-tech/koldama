@@ -1,4 +1,5 @@
 import { useState, useMemo, memo } from 'react';
+import { KoldaImage } from '@/components/KoldaImage';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 import libraryImage from '@/assets/library-books.jpg';
@@ -57,7 +58,7 @@ const Bibliotheque = memo(() => {
               className="bg-card rounded-lg shadow-md p-3 sm:p-4 flex flex-col items-center text-center transition-shadow hover:shadow-xl"
             >
               <div className="w-full aspect-[2/3] bg-muted rounded mb-2 sm:mb-3 shadow-lg flex items-center justify-center overflow-hidden">
-                <img 
+                <KoldaImage
                   src={libraryImage} 
                   alt={`Couverture de ${livre.title}`} 
                   className="w-full h-full object-cover"

@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { Users } from 'lucide-react';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
 
@@ -28,12 +29,7 @@ const Partenaires = memo(() => {
               className="min-w-[160px] sm:min-w-[180px] lg:min-w-[200px] bg-card p-3 sm:p-4 rounded-lg shadow-md border-b-4 border-accent flex-shrink-0"
             >
               <div className="h-8 sm:h-10 flex items-center justify-center mb-2 sm:mb-3">
-                <img 
-                  src={p.logo} 
-                  alt={p.name} 
-                  className="h-full object-contain"
-                  loading="lazy"
-                />
+                <Users aria-hidden="true" className="h-6 w-6 text-accent" />
               </div>
               <p className="text-center font-bold text-card-foreground text-xs sm:text-sm truncate">{p.name}</p>
               <p className="text-center text-[10px] sm:text-xs text-muted-foreground mt-1 line-clamp-2">
@@ -53,12 +49,9 @@ const Partenaires = memo(() => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {partners?.filter(p => p.category === cat).map(p => (
               <div key={p.id} className="flex items-center bg-card p-3 sm:p-4 rounded-lg shadow">
-                <img 
-                  src={p.logo} 
-                  alt={p.name} 
-                  className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded mr-3 sm:mr-4 flex-shrink-0"
-                  loading="lazy"
-                />
+                <span className="mr-3 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-emerald-950 to-amber-900 text-white sm:mr-4 sm:h-16 sm:w-16">
+                  <Users aria-hidden="true" className="h-6 w-6" />
+                </span>
                 <div className="min-w-0 flex-1">
                   <h4 className="text-base sm:text-lg font-bold text-card-foreground truncate">{p.name}</h4>
                   <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{p.description}</p>
