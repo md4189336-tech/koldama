@@ -79,8 +79,8 @@ const Bibliotheque = memo(() => {
                 }`}
                 disabled={!livre.telecharger}
                 onClick={() => {
-                  if (livre.telecharger && (livre as any).pdfUrl) {
-                    window.open((livre as any).pdfUrl, '_blank');
+                  if (livre.telecharger && 'pdfUrl' in livre && livre.pdfUrl) {
+                    window.open(livre.pdfUrl, '_blank');
                   } else if (livre.telecharger) {
                     alert(`Livre disponible : ${livre.title}`);
                   }
