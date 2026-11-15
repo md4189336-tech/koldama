@@ -2,6 +2,7 @@ import { useState, useMemo, memo } from 'react';
 import { KoldaImage } from '@/components/KoldaImage';
 import { useFetchData } from '@/hooks/useFetchData';
 import { StatusView } from '@/components/StatusView';
+import { EasfCatalogue } from '@/components/EasfCatalogue';
 import libraryImage from '@/assets/library-books.jpg';
 
 const Bibliotheque = memo(() => {
@@ -92,6 +93,8 @@ const Bibliotheque = memo(() => {
           ))}
         </div>
       </section>
+
+      <EasfCatalogue />
 
       {/* Authors Section */}
       <section className="p-4 sm:p-6 lg:p-10 rounded-xl bg-muted/50 shadow-inner">
